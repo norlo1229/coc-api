@@ -1,14 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoCApp.DataAccess.Sql.Entities
+namespace CoCApp.Domain
 {
-    public class SkillDefinition : DbEntity
+    public class SkillDefinition
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public int MinimumLevel { get; set; }
     }
 }

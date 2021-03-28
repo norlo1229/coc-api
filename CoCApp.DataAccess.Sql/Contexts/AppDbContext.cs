@@ -20,5 +20,7 @@ namespace CoCApp.DataAccess.Sql.Contexts
         public DbSet<Inspector> Inspectors { get; set; }
         public DbSet<InspectorSkill> InspectorSkills { get; set; }
         public DbSet<SkillDefinition> SkillDefinitions { get; set; }
+        public DbSet<CharacteristicDefinition> CharacteristicDefinitions { get; set; }
+        public DbSet<InspectorCharacteristics> InspectorCharacteristics { get; set; }
     }
 }

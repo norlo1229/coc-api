@@ -1,4 +1,5 @@
 ﻿using CoCApp.DataAccess.Sql.Contexts;
+using CoCApp.DataAccess.Sql.Entities;
 using CoCApp.DataAccess.Sql.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,8 @@ namespace CoCApp.DataAccess.Sql.Extensions
         public static void RegisterRepositories(this IServiceCollection services)
         {
             services.AddTransient<ILogRepository, LogRepository>();
+            services.AddTransient<IInspectorRepository, InspectorRepository>();
+            services.AddTransient<IRepository<SkillDefinition>, SkillDefinitionRepository>();
         }
     }
 }

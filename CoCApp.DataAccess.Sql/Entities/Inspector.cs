@@ -6,6 +6,7 @@ namespace CoCApp.DataAccess.Sql.Entities
     public class Inspector : DbEntity
     {
         public Guid Id { get; set; }
+        public virtual InspectorCharacteristics Characteristics {get;set;}
         public virtual List<InspectorSkill> Skills { get; set; }
     }
 }
