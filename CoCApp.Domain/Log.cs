@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoCApp.Domain
 {
@@ -13,6 +14,7 @@ namespace CoCApp.Domain
         [Required]
         public string Level { get; set; }
         public string Exception { get; set; }
+        [Column(TypeName = "xml")]
         public string Properties { get; set; }
         public string LogEvent { get; set; }
         [Required]

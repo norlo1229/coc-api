@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CoCApp.Domain;
 
 namespace CoCApp.Api.DataMapping
 {
@@ -6,7 +7,7 @@ namespace CoCApp.Api.DataMapping
     {
         public DataMappingProfile()
         {
-
+            CreateMap<Log, Dtos.Log>().ReverseMap();
         }
     }
 }

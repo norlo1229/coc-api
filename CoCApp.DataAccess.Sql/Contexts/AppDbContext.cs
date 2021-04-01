@@ -1,4 +1,4 @@
-﻿using CoCApp.DataAccess.Sql.Entities;
+﻿using CoCApp.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoCApp.DataAccess.Sql.Contexts
