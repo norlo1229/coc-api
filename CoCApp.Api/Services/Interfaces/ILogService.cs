@@ -1,4 +1,4 @@
-﻿namespace CoCApp.Api.Services
+﻿namespace CoCApp.Api.Services.Interfaces
 {
     public interface ILogService
     {

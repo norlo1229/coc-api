@@ -7,8 +7,7 @@ namespace CoCApp.Api.Extensions
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddTransient<ILogService, LogService>();
-            services.AddTransient<ISkillDefinitionService, SkillDefinitionService>();
+
         }
     }
 }

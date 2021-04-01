@@ -6,8 +6,7 @@ namespace CoCApp.Api.DataMapping
     {
         public DataMappingProfile()
         {
-            this.CreateMap<DataAccess.Sql.Entities.Inspector, Domain.Inspector>().ReverseMap();
-            this.CreateMap<DataAccess.Sql.Entities.SkillDefinition, Domain.SkillDefinition>().ReverseMap();
+
         }
     }
 }

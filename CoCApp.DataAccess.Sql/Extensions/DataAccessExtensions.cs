@@ -18,9 +18,7 @@ namespace CoCApp.DataAccess.Sql.Extensions
 
         public static void RegisterRepositories(this IServiceCollection services)
         {
-            services.AddTransient<ILogRepository, LogRepository>();
-            services.AddTransient<IInspectorRepository, InspectorRepository>();
-            services.AddTransient<IRepository<SkillDefinition>, SkillDefinitionRepository>();
+            services.AddTransient<ILogsRepository, LogsRepository>();
         }
     }
 }
