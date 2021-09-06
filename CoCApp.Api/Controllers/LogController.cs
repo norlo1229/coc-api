@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using CoCApp.Api.Dtos;
-using CoCApp.Api.Services.Interfaces;
-using CoCApp.Domain;
-using Microsoft.AspNetCore.Http;
+using CoCApp.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoCApp.Api.Controllers
@@ -15,27 +11,23 @@ namespace CoCApp.Api.Controllers
     [ApiController]
     public class LogController : ControllerBase
     {
-        private readonly ILogService logService;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public LogController(ILogService logService, IMapper mapper)
+        public LogController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this.logService = logService;
+            this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Dtos.Log>>> GetLogs([FromQuery] DateTimeOffset? beginDate, [FromQuery]DateTimeOffset? endDate, string logLevel)
+        public async Task<ActionResult<IEnumerable<Domain.Dtos.Log>>> GetLogs([FromQuery] DateTimeOffset? beginDate, [FromQuery]DateTimeOffset? endDate)
         {
-            var filters = new LogFilterOptions()
-            {
-                BeginDate = beginDate,
-                EndDate = endDate,
-                LogLevel = logLevel
-            };
+            var finalStartDate = beginDate ?? DateTime.Now.AddDays(-1);
+            var finalEndDate = endDate ?? DateTime.Now;
 
-            var logs = await logService.GetFilteredLogsAsync(filters);
-            return Ok(mapper.Map<List<Dtos.Log>>(logs));
+            var logs = await unitOfWork.Logs.GetLogsAsync(finalStartDate, finalEndDate);
+            return Ok(mapper.Map<List<Domain.Dtos.Log>>(logs));
         }
     }
 }

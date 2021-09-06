@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoCApp.Domain
+namespace CoCApp.Domain.Entities
 {
     public class LogFilterOptions
     {

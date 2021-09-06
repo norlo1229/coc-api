@@ -1,5 +1,4 @@
 ﻿using CoCApp.DataAccess.Sql.Contexts;
-using CoCApp.DataAccess.Sql.Entities;
 using CoCApp.DataAccess.Sql.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

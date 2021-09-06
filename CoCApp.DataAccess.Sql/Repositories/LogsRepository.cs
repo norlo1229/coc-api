@@ -1,29 +1,23 @@
 ﻿using CoCApp.DataAccess.Sql.Contexts;
-using CoCApp.Domain;
+using CoCApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CoCApp.DataAccess.Sql.Repositories
 {
-    public class LogsRepository : ILogsRepository
+    public class LogsRepository : Repository<Log>, ILogsRepository
     {
-        private readonly AppDbContext context;
-
-        public LogsRepository(AppDbContext context)
+        public LogsRepository(AppDbContext context) : base(context)
         {
-            this.context = context;
         }
 
-        public async Task<IEnumerable<Log>> GetLogsAsync(DateTimeOffset beginDate, DateTimeOffset endDate)
+        public async Task<IEnumerable<Log>> GetLogsAsync(DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            return await context.Logs
-                .Where(x => x.TimeStamp >= beginDate && x.TimeStamp <= endDate)
-                .OrderByDescending(x => x.TimeStamp)
-                .ToListAsync();
+            var results = await context.Logs.Where(x => x.TimeStamp >= startDate && x.TimeStamp <= endDate).ToListAsync();
+            return results;
         }
     }
 }

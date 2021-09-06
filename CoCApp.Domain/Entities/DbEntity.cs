@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoCApp.DataAccess.Sql.Entities
+namespace CoCApp.Domain.Entities
 {
     public class DbEntity
     {

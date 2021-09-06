@@ -4,14 +4,16 @@ using CoCApp.DataAccess.Sql.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoCApp.DataAccess.Sql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906171934_create-characteristics-table")]
+    partial class createcharacteristicstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,6 @@ namespace CoCApp.DataAccess.Sql.Migrations
                     b.Property<int>("Constitution")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<int>("Dexterity")
                         .HasColumnType("int");
 
@@ -45,9 +44,6 @@ namespace CoCApp.DataAccess.Sql.Migrations
 
                     b.Property<Guid>("InvestigatorId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("Luck")
                         .HasColumnType("int");
@@ -63,8 +59,7 @@ namespace CoCApp.DataAccess.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvestigatorId")
-                        .IsUnique();
+                    b.HasIndex("InvestigatorId");
 
                     b.ToTable("Characteristics");
                 });
@@ -153,8 +148,7 @@ namespace CoCApp.DataAccess.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvestigatorId")
-                        .IsUnique();
+                    b.HasIndex("InvestigatorId");
 
                     b.ToTable("PersonalInformation");
                 });
@@ -162,8 +156,8 @@ namespace CoCApp.DataAccess.Sql.Migrations
             modelBuilder.Entity("CoCApp.Domain.Entities.Characteristics", b =>
                 {
                     b.HasOne("CoCApp.Domain.Entities.Investigator", "Investigator")
-                        .WithOne("Characteristics")
-                        .HasForeignKey("CoCApp.Domain.Entities.Characteristics", "InvestigatorId")
+                        .WithMany()
+                        .HasForeignKey("InvestigatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -173,19 +167,12 @@ namespace CoCApp.DataAccess.Sql.Migrations
             modelBuilder.Entity("CoCApp.Domain.Entities.PersonalInformation", b =>
                 {
                     b.HasOne("CoCApp.Domain.Entities.Investigator", "Investigator")
-                        .WithOne("PersonalInformation")
-                        .HasForeignKey("CoCApp.Domain.Entities.PersonalInformation", "InvestigatorId")
+                        .WithMany()
+                        .HasForeignKey("InvestigatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Investigator");
-                });
-
-            modelBuilder.Entity("CoCApp.Domain.Entities.Investigator", b =>
-                {
-                    b.Navigation("Characteristics");
-
-                    b.Navigation("PersonalInformation");
                 });
 #pragma warning restore 612, 618
         }
